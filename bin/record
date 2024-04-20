@@ -1,0 +1,8 @@
+#! /bin/bash
+
+echo starting to record, press ctrl+c to stop
+echo
+num="$(find data -name '*.wav' | wc -l | sed 's/[^0-9]//g')"
+file="./data/recording$num.wav"
+echo writing to $file
+rec --channels 1 --rate 16k --bits 16 "$file"

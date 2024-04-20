@@ -1,0 +1,15 @@
+#! /bin/bash
+
+if [[ -z "$1" ]]; then
+  echo "usage: $0 <file>"
+  echo
+  echo ./data:
+  ls ./data
+  exit 1
+fi
+
+./whisper.cpp/main \
+  -m ./whisper.cpp/models/ggml-small.bin \
+  -f "$1" \
+  -osrt \
+  -np

@@ -1,0 +1,53 @@
+#! /bin/bash
+
+a2="$2"
+
+function parse_file() {
+  if [ -f "$a2" ]; then
+    file="$a2"
+  else
+    file="$(find data -name '*.wav' | sort -V | tail -n1)"
+  fi
+}
+
+case "$1" in
+  "record")
+    # parse_file
+    # echo 2 $file
+    bin/record
+    ;;
+  "transcribe")
+    parse_file
+    bin/transcribe "$file"
+    ;;
+  "summarize")
+    parse_file
+    bin/summarize "$file"
+    ;;
+  "all")
+    function next() {
+      echo
+      echo transcribing...
+      echo
+      bin/t transcribe
+      echo
+      echo
+      bin/t summarize
+
+    }
+    trap next EXIT
+      bin/t record
+
+    ;;
+  *)
+    echo "usage: $0 <command> <file?>"
+    echo
+    echo "  commands:"
+    echo
+    echo "   record"
+    echo "   transcribe <file?>"
+    echo "   summarize <file?>"
+    echo
+    echo "  if <file> is omitted, the command will use the most recent recording"
+    ;;
+esac

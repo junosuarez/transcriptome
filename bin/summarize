@@ -1,0 +1,32 @@
+#! /bin/bash
+
+if [[ -z "$1" ]]; then
+  echo "usage: $0 <file>"
+  echo
+  echo ./data:
+  ls ./data
+  exit 1
+fi
+
+filemtime=$(date -r $1 "+%F")
+
+
+ollama run llama3 << EOF
+i will give you a transcript of an audio recording in SRT format.
+it was recorded on $filemtime
+
+===
+
+$(cat $1.srt)
+
+===
+
+this was the end of the transcript.
+the last timestamp at the end is the length of this recording.
+start by telling how long the recording was.
+then give a short summary.
+finally, give some relevant bullet points.
+give your response in markdown format.
+be terse.
+begin your answer with "The recording was"
+EOF

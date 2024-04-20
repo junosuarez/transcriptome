@@ -1,0 +1,25 @@
+Here are the names of the F1 drivers:
+
+Pierre Gasly
+Esteban Ocon
+Fernando Alonso
+Lance Stroll
+Charles Leclerc
+Carlos Sainz Jr.
+Oliver Bearman
+Kevin Magnussen
+Nico Hülkenberg
+Zhou Guanyu
+Valtteri Bottas
+Lando Norris
+Oscar Piastri
+Lewis Hamilton
+George Russell
+Daniel Ricciardo
+Yuki Tsunoda
+Max Verstappen
+Sergio Pérez
+Logan Sargeant
+Alexander Albon
+
+The speakers are very British, but please make sure the names are spelled exactly as I gave them above.

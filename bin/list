@@ -1,0 +1,32 @@
+#! /bin/bash
+
+for rec in $(find data -name '*.wav' | sort -V); do
+  echo $rec
+
+  if ! [[ -f $rec.srt ]]; then
+    bin/transcribe $rec > /dev/null
+  fi
+
+  if ! [[ -f $rec.meta ]]; then
+
+    meta=$(ollama run llama3 << EOF
+i will give you a transcript of an audio recording in SRT format.
+
+===
+
+$(cat $rec.srt)
+
+===
+
+this was the end of the transcript.
+describe it in 5 words or less with no punctuation
+EOF
+    )
+    echo $meta | head -1 > $rec.meta
+  fi
+
+  echo "  $(cat $rec.meta)"
+  echo
+done
+
+# ollama run llama3 "here is a list of audio files and their descriptions. clean it up for me and present it in a nice and readable format. $(bin/list)"
